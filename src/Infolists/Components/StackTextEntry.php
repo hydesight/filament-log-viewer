@@ -23,8 +23,11 @@ class StackTextEntry
             ->formatStateUsing(self::getStateUsing(...));
     }
 
-    private static function getHidden(array $record): bool
+    private static function getHidden($record): bool
     {
+        if ($record instanceof \Boquizo\FilamentLogViewer\Models\Log) {
+            $record = $record->toArray();
+        }
         return empty($record['stack']);
     }
 
